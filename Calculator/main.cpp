@@ -1,4 +1,6 @@
 #include <iostream>
+#include <limits>
+#include<string>
 
 float Addition(float a, float b)
 {
@@ -36,15 +38,59 @@ int main()
 		std::cout << "******************************" << "\n";
 
 		std::cout << "Press the number in front of operation to select it" << "\n";
-		std::cin >> n;
+
+		std::string input;
+		std::getline(std::cin >> std::ws , input);
+		size_t len;
+
+		try 
+		{
+			n = std::stoi(input, &len);
+
+			if (len != input.length())
+			{
+				std::cout << "Invalid input!" << "\n";
+				continue;
+			}
+		}
+
+		catch(...)
+		{
+			std::cout << "Invalid input!" << "\n";
+			continue;
+		}
 
 		if (n == 5) break;
 
 		std::cout << "Type in first operand : ";
-		std::cin >> a;
+		
+		if (!(std::cin >> a))
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			//std::cin.ignore(10000, '\n'); can be written this way but the above one is better
+
+			std::cout << "Invalid choice!\n";
+			continue;
+		}
 
 		std::cout << "Type in second operand : ";
-		std::cin >> b;
+		
+		if (!(std::cin >> b))
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			//std::cin.ignore(10000, '\n'); can be written this way but the above one is better
+
+			std::cout << "Invalid choice!\n";
+			continue;
+		}
+		
+		if (n == 4 && b == 0)
+		{
+			std::cout << "Cannot divide by zero!" << "\n";
+			continue;
+		}
 
 		switch (n)
 		{
@@ -66,10 +112,10 @@ int main()
 
 		default:
 			std::cout << "Invalid operation try again! \n";
-			break;
+			continue; // break is not written, as I do not want to print res, as its value is 0 for this case
 		} 
-
 		std::cout << "Answer : " << res << "\n";
+
 	} while (n != 5);
 
 	return 0;
