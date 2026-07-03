@@ -22,12 +22,14 @@ float Division(float a, float b)
 
 int main()
 {
-	float a, b, res;
-	std::cin >> a >> b;
+	std::cout << "Press the number in front of operation to select it" << "\n";
+	std::cout << "************ MENU ************" << "\n";
+	std::cout << "1 ADDITION" << "\n";
+	std::cout << "2 SUBTRACTION" << "\n";
+	std::cout << "3 MULTIPLICATION" << "\n";
+	std::cout << "4 DIVISION" << "\n";
+	std::cout << "******************************" << "\n";
 
-	res = Division(a, b);
-
-	std::cout << res;
 
 	return 0;
 }
